@@ -20,6 +20,7 @@ def main():
 
     # You can also print out the functions docstring using the __doc__ property
     print(module_0_comment.__doc__)
+
     
     print("-----------------------------------------")
 
@@ -29,8 +30,8 @@ def main():
     # Functions take arguments as parameters.
     # To clarify, parameters are the names listed in the functions definition.
     # The arguments are the specific values passed to the function. 
-    my_name = "" # put your name inside of the quotes
-    my_favorite_color = "" # put your favorite color inside of the quotes
+    my_name = "Ryan" # put your name inside of the quotes
+    my_favorite_color = "green" # put your favorite color inside of the quotes
 
     # TODO: Look inside the module_1_parameters() function below to see how it works.
 
@@ -38,7 +39,7 @@ def main():
     # the parameters are name and color
     module_1_parameters(my_name, my_favorite_color)
 
-    print("-----------------------------------------")
+    print("------------------------------------------")
 
 
     ### PART 2 ###
@@ -47,7 +48,7 @@ def main():
     # Functions can also return values at the end.
 
     # TODO: Read through the module_2_return function. Change the values passed so the returned result is 64
-    returned_result = module_2_return(1, 0)
+    returned_result = module_2_return(8, 2)
     print(f"The returned result should be 64: {returned_result}")
 
     print("-----------------------------------------")
@@ -138,7 +139,7 @@ def module_1_parameters(name, color):
         Returns:
             None
     '''
-
+    
     # TODO: Read through this. There is some complicated code, see if you might be able to figure out what's going on.
     color_objects = {
         "red": "an apple",
@@ -176,7 +177,7 @@ def module_2_return(a, b):
         Returns:
             (int) a to the power of b
     '''
-    return a**b
+    return 8**2
 
 
 
@@ -206,7 +207,7 @@ def module_3_operators(a, b):
     # example: (x + y) * z
 
     # TODO: Change None to return the value of c, given a and b
-    return None 
+    return (a**2 + b**2)**0.5
 
         
 
@@ -332,22 +333,22 @@ def module_5_logic():
     # Change all of the None to the correct answer
 
     question_1 = 5*6 == 29
-    answer_1 = None
+    answer_1 = False
 
     question_2 = 10 != 11
-    answer_2 = None
+    answer_2 = True
 
     question_3 = 2*6 >= 11
-    answer_3 = None
+    answer_3 = True
 
     question_4 = 2+2 == 4 and 3+3 == 5
-    answer_4 = None
+    answer_4 = False
 
     question_5 = 2+3 == 4 or 3+3 == 6
-    answer_5 = None
+    answer_5 = True
 
     question_6 = 2 > 1 and not 10 != 10
-    answer_6 = None
+    answer_6 = True
 
     return question_1 == answer_1 and question_2 == answer_2 and question_3 == answer_3 and question_4 == answer_4 and question_5 == answer_5 and question_6 == answer_6
 
@@ -416,7 +417,7 @@ def module_6_conditional():
         result_number = 3
 
     # change this to match result_number
-    my_number = None
+    my_number = 5
 
 
     
