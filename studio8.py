@@ -55,7 +55,7 @@ def get_authors(soup:bs):
     for quote in quotes:
         author = quote.find("small", {"class":"author"}).get_text(strip=True)
         authors_list.append(author)
-    if author in authors_list > 1:
+    
         mydict = {author:authors_list.count(author) for author in authors_list}
     
     return mydict
