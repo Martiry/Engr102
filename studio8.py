@@ -18,17 +18,13 @@ def main():
     soup = bs(r.content, "html.parser")
 
     scrape_quotes(soup)
-    top_ten_tags(soup)
-    get_authors(soup)
+   
     quotes = []
-    authors_list = []
-    top_tags = []
-    top_tags.append(top_ten_tags(soup))
+    
         
     while True:
 
         quotes.extend(scrape_quotes(soup))
-        authors_list.append(get_authors(soup))
         
         time.sleep(1)
 
@@ -41,25 +37,43 @@ def main():
         r = requests.get(next_page)
         soup = bs(r.content, "html.parser")
 
-    get_shortest_and_longest(quotes)
-    print (top_tags)
-    print (authors_list)
-    
+    get_shortest_and_longest(quotes)    
+    print(get_most_tags(quotes)[:10])
+    print(multi_quote_authors(quotes)[:14])
     return
 
+def get_most_tags(quotes):
+    tags_dict={}
 
-def get_authors(soup:bs):
-    quotes = soup.find_all("div", {"class":"quote"})
-    authors_list = []
-    mydict = {author:authors_list.count(author) for author in authors_list}
     for quote in quotes:
-        author = quote.find("small", {"class":"author"}).get_text(strip=True)
-        authors_list.append(author)
+        for tag in quote.tags:
+            if tag in tags_dict:
+                tags_dict[tag] += 1
+            else:
+                tags_dict[tag] = 1
+
+    tags_items = list(tags_dict.items())
+    tags_items.sort(key = lambda x: x[1], reverse=True)
+    return tags_items            
+
+
+
+
+def multi_quote_authors(quotes):
+    authors_dict = {}
+    filtered_authors_dict = {}
+
+    for quote in quotes:
+        author = quote.author
+        if author in authors_dict:
+            authors_dict[author] += 1
+        else:
+            authors_dict[author] = 1
     
-        mydict = {author:authors_list.count(author) for author in authors_list}
-    
-    return mydict
-    
+    authors_items = list(authors_dict.items())
+    authors_items.sort(key = lambda x: x[1], reverse = True)
+    print(authors_items)
+    return authors_items
 
 
 def get_shortest_and_longest(quotes):
@@ -101,20 +115,7 @@ def get_next_url(soup: bs):
 
     return url
 
-
-def top_ten_tags(soup:bs):
-    items = soup.find_all("span", {"class":"tag-item"})
-
-    tags_list = []
-
-    
-    for tag in items:
-        tag = tag.find("a", {"class": "tag"}).get_text(strip=True)
-        tags_list.append(tag)
-    print (tags_list)
-
-    return tags_list
-        
+      
 
 
 def scrape_quotes(soup:bs):
@@ -135,7 +136,7 @@ def scrape_quotes(soup:bs):
             tags_text.append(tag.get_text(strip=True))
         print (tags_text)
     
-    quotes_list.append(Quote(text, author, tags_text))
+        quotes_list.append(Quote(text, author, tags_text))
     
 
     return quotes_list
